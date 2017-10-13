@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os/exec"
@@ -60,7 +61,8 @@ func main() {
 
 	url := getRemoteURL()
 	owner, repo := parseURL(url)
-	pulls, _, err := client.PullRequests.List(owner, repo, nil)
+	ctx := context.Background()
+	pulls, _, err := client.PullRequests.List(ctx, owner, repo, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
